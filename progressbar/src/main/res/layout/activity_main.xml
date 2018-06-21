@@ -6,13 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.jeremy.progressbar.view.HorizentalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:progress_reach_color="#FF0000"
+            app:progress_reach_height="10dp"
+            app:progress_text_color="#00ff00"
+            app:progress_text_offset="5dp"
+            app:progress_text_size="16sp"
+            android:progress="0"
+            app:progress_unreach_height="5dp"
+            app:progress_unreach_color="#0000ff"/>
+
+        <com.jeremy.progressbar.view.HorizentalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:progress_reach_color="#FF0000"
+            app:progress_reach_height="10dp"
+            app:progress_text_color="#00ff00"
+            app:progress_text_offset="5dp"
+            app:progress_text_size="16sp"
+            android:progress="50"
+            app:progress_unreach_height="5dp"
+            app:progress_unreach_color="#0000ff"/>
+
+        <com.jeremy.progressbar.view.HorizentalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:progress_reach_color="#FF0000"
+            app:progress_reach_height="10dp"
+            app:progress_text_color="#00ff00"
+            app:progress_text_offset="5dp"
+            app:progress_text_size="16sp"
+            android:progress="100"
+            app:progress_unreach_height="5dp"
+            app:progress_unreach_color="#0000ff"/>
+
+        <com.jeremy.progressbar.view.HorizentalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:progress_reach_color="#FF0000"
+            app:progress_reach_height="10dp"
+            app:progress_text_color="#00ff00"
+            app:progress_text_offset="5dp"
+            app:progress_text_size="16sp"
+            android:progress="90"
+            app:progress_unreach_height="5dp"
+            app:progress_unreach_color="#0000ff"/>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

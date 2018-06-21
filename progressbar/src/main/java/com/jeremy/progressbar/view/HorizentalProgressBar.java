@@ -2,6 +2,7 @@ package com.jeremy.progressbar.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -26,7 +27,7 @@ public class HorizentalProgressBar extends ProgressBar {
     private int mReachHeight = dp2px(DEFAULT_HEIGHT_REACH);
     private int mTextOffset = dp2px(DEFAULT_TEXT_OFFSET);
 
-    private Paint paint=new Paint();
+    private Paint mPaint=new Paint();
     private int mRealWidth;//除去了padding
 
     public HorizentalProgressBar(Context context) {
@@ -40,6 +41,7 @@ public class HorizentalProgressBar extends ProgressBar {
     public HorizentalProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         obtainStyleAttrs(attrs);
+        mPaint.setTextSize(mTextSize);
     }
 
     /**
@@ -59,6 +61,74 @@ public class HorizentalProgressBar extends ProgressBar {
 
         typedArray.recycle();
 
+    }
+
+    @Override
+    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        //这里是定义水平的进度条，所以用户必须指定宽度，所以对宽度mode不进行适配
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height=measureHeight(heightMeasureSpec);
+
+        setMeasuredDimension(width,height);
+
+        mRealWidth=getMeasuredWidth()-getPaddingLeft()-getPaddingRight();//实际绘制区域宽度
+    }
+
+    @Override
+    protected synchronized void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.save();
+        canvas.translate(getPaddingLeft(),getHeight()/2);
+
+        boolean noNeedUnReach=false;
+
+        String text=getProgress()+"%";
+        int textWidth= (int) mPaint.measureText(text);
+        float ratio =getProgress()*1.0f/getMax();
+        float progressX=ratio*mRealWidth;
+        if (progressX+textWidth>mRealWidth){
+            progressX=mRealWidth-textWidth;
+            noNeedUnReach=true;
+        }
+
+        float endX=progressX-mTextOffset/2;
+        if (endX>0){
+            mPaint.setColor(mReachColor);
+            mPaint.setStrokeWidth(mReachHeight);
+            canvas.drawLine(0,0,endX,0,mPaint);
+        }
+
+        //draw text
+        mPaint.setColor(mTextColor);
+        int y= (int) (-(mPaint.descent()+mPaint.ascent())/2);
+        canvas.drawText(text,progressX,y,mPaint);
+
+        //draw unreach bar
+        if (!noNeedUnReach){
+            float start=progressX+mTextOffset/2+textWidth;
+            mPaint.setColor(mUnReachColor);
+            mPaint.setStrokeWidth(mUnReachHeight);
+            canvas.drawLine(start,0,mRealWidth,0,mPaint);
+        }
+    }
+
+    private int measureHeight(int heightMeasureSpec) {
+        int result=0;
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (heightMode==MeasureSpec.EXACTLY){
+            result=heightSize;
+        }else {
+            int textHeight= (int) (mPaint.descent()-mPaint.ascent());//文字高度
+            result=getPaddingBottom()+getPaddingTop()+
+                    Math.max(Math.max(mReachHeight,mUnReachHeight),Math.abs(textHeight));
+            if (heightMode==MeasureSpec.AT_MOST){
+                result=Math.min(result,heightSize);
+            }
+        }
+        return result;
     }
 
     private int dp2px(int dpVal) {
