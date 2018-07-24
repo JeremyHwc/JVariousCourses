@@ -1,26 +1,28 @@
 package com.tencent.hotfix;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private TextView mResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mResult = findViewById(R.id.result);
 
-        ClassLoader classLoader = getClassLoader();
-        if (classLoader != null) {
-            Log.e(TAG, "classloader:" + classLoader.toString());
-            while (classLoader.getParent() != null) {
-                classLoader = classLoader.getParent();
-                Log.e(TAG, "classloader:" + classLoader.toString());
-            }
-        }
+    }
 
+    public void produceBug(View view) {
+        int i=2;
+        mResult.setText(""+(100/i));
+    }
+
+    public void fixBug(View view) {
 
     }
 }
