@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply tinker插件
+//apply plugin: 'com.tencent.tinker.patch'
 
 android {
     compileSdkVersion 27
@@ -35,4 +37,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.alipay.euler:andfix:0.5.0@aar'//引入AndFix热修复模块
+
+    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+    //可选，用于生成application类
+    compileOnly('com.tencent.tinker:tinker-android-anno:1.9.1')
+    annotationProcessor 'com.tencent.tinker:tinker-android-anno:1.9.1'
+    //tinker的核心库
+    implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
+
+    //multidex
+    api 'com.android.support:multidex:1.0.2'
 }
