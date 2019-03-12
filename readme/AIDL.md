@@ -385,5 +385,6 @@ interface IMoocSelfDifineDataAidl {
 
 
 ### 五.AIDL原理简单剖析
+<img "https://github.com/JeremyHwc/JVariousCourses/blob/master/aidlclient/src/main/res/drawable/AIDL.jpg" width=600 height=500/>
 
 
