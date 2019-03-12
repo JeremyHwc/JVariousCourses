@@ -388,20 +388,20 @@ interface IMoocSelfDifineDataAidl {
 <img src="https://github.com/JeremyHwc/JVariousCourses/blob/master/aidlclient/src/main/res/drawable/AIDL.jpg" width="600" height="300"/>
 
 ### 六.总结
-1. 操作流程
-    .定义AIDL文件
-    .服务端实现接口
-    .客户端调用接口
-2. 基本语法
-    .语法和Java的接口相似
-    .AIDL只支持方法，不能定义静态成员
-    .AIDL运行方法有任何类型的参数和返回值
-    .除默认的类型外，均需要导包
+1. 操作流程     
+ (1)定义AIDL文件   
+ (2)服务端实现接口    
+ (3)客户端调用接口    
+2. 基本语法     
+ (1)语法和Java的接口相似   
+ (2)AIDL只支持方法，不能定义静态成员     
+ (3)AIDL运行方法有任何类型的参数和返回值   
+ (4)除默认的类型外，均需要导包  
 3. 默认支持的数据类型
-    .基本数据类型（除short类型外,因为在对象序列化的过程中，不支持short类型）
-    .String,CharSequence
-    .List,Map
-    .Parcelable
+ (1)基本数据类型（除short类型外,因为在对象序列化的过程中，不支持short类型）  
+ (2)String,CharSequence    
+ (3)List,Map   
+ (4)Parcelable     
 4.AIDL IPC 多个客户端  多线程
 
 
