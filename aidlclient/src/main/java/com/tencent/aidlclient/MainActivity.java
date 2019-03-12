@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //绑定上服务的时候调用
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            //拿到了远程的服务
+            //拿到了远程的服务，只是一个远程服务的代理Proxy
             Log.d("AIDL_TEST", "onServiceConnected");
             mIMoocAid2 = IMoocSelfDifineDataAidl.Stub.asInterface(service);
 
