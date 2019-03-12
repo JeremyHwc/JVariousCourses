@@ -1,1 +1,1 @@
-include ':app', ':progressbar', ':aidl', ':hotfix', ':svg'
+include ':app', ':aidlclient', ':progressbar', ':aidlserver', ':hotfix', ':svg', ':aidlclient'
